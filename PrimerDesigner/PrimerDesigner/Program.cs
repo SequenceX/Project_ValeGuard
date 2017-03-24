@@ -8,40 +8,67 @@ namespace PrimerDesigner
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            
-            Primer Primer1 = new Primer("acccctt", 50, 50);
-            Console.WriteLine("Die Tm(Nearest Neighbour)  ist: " + Primer1.GetNearestNeighbourTemp());
-            Console.WriteLine(Primer1.Sequence);
-            Console.WriteLine(Primer1.GetReverseComplement());
-
-            Console.WriteLine(" ");
-
-
+            Console.WriteLine("Erstellung Primer1");
+            Primer Primer1 = new Primer("ATATATCGCGCTAGATCGAT", 50, 50);
+            Console.WriteLine("Sequence: "+Primer1.Sequence);
+            Console.WriteLine("ReverseComplement: "+Primer1.GetReverseComplement());
+            Console.WriteLine("Tm(Nearest Neighbour): " + Primer1.GetNearestNeighbourTemp());
+            Console.WriteLine("Primer1 Done");
+            Console.WriteLine("--------------------------------------------------------");
 
 
+
+
+
+
+
+            //AAACGGGGGTTGCCATATATCGCGCTAGATCGATCGATAAAATTGCCTGATCCCCCCTTTTTCGATCGATAAAATTGCCTGATCCCTTTAAATGATCCCCCAAAGAGGGGATCTCTTTTTGATCCCCCTTTTCCCCCCCTGATCCCCCCCAAAAAAGAGGAGGAGAGTAGATGACCACGGATATTAGCACACATATATATGGGCCCCTTTAGTCTCGTA
+
+            Console.WriteLine("Erstellung Seq1");
             GeneSequence seq1 = null;
             try
             {
-                seq1 = new GeneSequence("AAGACCgttcccggaaaGC");
+                seq1 = new GeneSequence("aTaacactgATATATATATATATATATATATATATATATATATATATATATAcTgAgTgAgTcATcATATaaactggATATATATattaATAaaTAatttaTaaATATATATATATATATATtatatatatatatatatatatatatatatatATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATA");
             }
             catch (Exception exc)
             {
                 Console.WriteLine(exc.Message);
-                Console.ReadLine();
-                Environment.Exit(0);
-
+                Console.ReadKey();
+                return 0;
             }
-            Console.WriteLine(seq1.Sequence);
-            //Console.WriteLine(Seq1.GetGenestrandSeqPrimer()[0]);//Output ist ein array. [0] wird ausgegeben =Primer F
-            // Console.WriteLine( Seq1.GetGenestrandSeqPrimer()[1]);//Output ist ein array. [1] wird ausgegeben =Primer R
-            //Console.WriteLine(Seq1.CheckForDnaChar());
-            Console.WriteLine("ende");
+            Console.WriteLine("Seq1 Sequence: " + seq1.Sequence);
+
+
+
+
+            try
+            {
+                Console.WriteLine("F_Primer Seq: "+seq1.GetGenestrandSeqPrimer(90, 120, 1000,30)[0]);//Output ist ein array. [0] wird ausgegeben =Primer F
+                Console.WriteLine(seq1.GetGenestrandSeqPrimer(90, 120, 1000,20)[1]);//Output ist ein array. [0] wird ausgegeben =Primer R
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+                Console.ReadKey();
+                return 0;
+            }
+
+
+            //Console.WriteLine(seq1.GetGenestrandSeqPrimer(250,120,1000)[0]);//Output ist ein array. [0] wird ausgegeben =Primer F
+            // Console.WriteLine( seq1.GetGenestrandSeqPrimer()[1]);//Output ist ein array. [1] wird ausgegeben =Primer R
+            //Console.WriteLine(seq1.CheckForDnaChar());
+
+
+
+
+            Console.WriteLine("End of Test");
+            //Console.WriteLine(seq1.Sequence.IndexOf();
+            Console.WriteLine("End of Test");
+
             Console.ReadKey();
-
-
-
+            return 0;
         }
     }
 }
