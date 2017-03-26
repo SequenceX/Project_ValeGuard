@@ -9,20 +9,7 @@ namespace PrimerDesigner
 {
     class GeneSequence
     {
-        /*
-        Planed:
-        Int GS Primer:
-           DONE Check der Min&Max Länge für Genestrand 150?-1000
-           Design in Mitte der Seq
-           Try Start of Primer GG/CC/GC/CG
-           Unic Base Check
-           Primer erweitern bis Tm passt
-
-            Primer Quality berechnen  Start, Unic...
-        */
-
-
-
+// Diese Klasse benötigt Klasse Primer zur berechnung der TM.
         //Konstruktor
         public GeneSequence(string DNASequence)
         {
@@ -74,7 +61,7 @@ namespace PrimerDesigner
             }
             return check;
         }
-        public string[] GetGenestrandSeqPrimer(int distanceBetweenPrimer = 90, int minSeqLänge = 120, int maxSeqLänge = 1000, int searchStartArea = 20) //Min und Max Länge für Primer mit vorgeschlagener, überschreibbarer anzeige
+        public string[] GetGenestrandSeqPrimer(int distanceBetweenPrimer = 90, int minSeqLänge = 120, int maxSeqLänge = 1000, int searchStartArea = 20)
         {
             string[] strReturn = new string[2] { "", "" };
             double targetTM = 58.00D;
@@ -95,11 +82,11 @@ namespace PrimerDesigner
             //Search for F Primer
             string firstSixFBases;
             string fPrimerStartPair;
-            int fPrimerstartPos;
+            int fPrimerStartPos;
             int firstFPrimerstartPos;
             firstFPrimerstartPos = midOfSeq - (distanceBetweenPrimer / 2);
-            fPrimerstartPos = firstFPrimerstartPos;
-            fPrimerStartPair = sequence.Substring(fPrimerstartPos,2);
+            fPrimerStartPos = firstFPrimerstartPos;
+            fPrimerStartPair = sequence.Substring(fPrimerStartPos,2);
             //Loop for search Primer
             int fUnicCounter = 0;
             bool fUnic = false;
@@ -112,54 +99,51 @@ namespace PrimerDesigner
                 {
                     if (fPrimerStartPair == "GG" || fPrimerStartPair == "GC" || fPrimerStartPair == "CG" || fPrimerStartPair == "CC")
                     {
-                        // Console.WriteLine(fPrimerStartPair);
                         fHighTempStart = true;
-                        break; // i = searchStartArea;
+                        break; 
                     }
                     else
                     {
-                        fPrimerstartPos -= 1;
-                        fPrimerStartPair = sequence.Substring(fPrimerstartPos, 2);
-                        //Console.WriteLine(fPrimerStartPair);
+                        fPrimerStartPos -= 1;
+                        fPrimerStartPair = sequence.Substring(fPrimerStartPos, 2);
                     }
                 }
                 //Search for 1x high Temp Start
                 if (fHighTempStart==false)
                 {
-                    fPrimerstartPos = firstFPrimerstartPos;
-                    fPrimerStartPair = sequence.Substring(fPrimerstartPos, 1);
+                    fPrimerStartPos = firstFPrimerstartPos;
+                    fPrimerStartPair = sequence.Substring(fPrimerStartPos, 1);
                     for (int i = 0; i < searchStartArea; i++)
                     {
-
                         if (fPrimerStartPair == "G" || fPrimerStartPair == "C" )
                         {
                             // Console.WriteLine(fPrimerStartPair);
                             fMidTempStart = true;
-                            break; // i = searchStartArea;
+                            break;
                         }
                         else
                         {
-                            fPrimerstartPos -= 1;
-                            fPrimerStartPair = sequence.Substring(fPrimerstartPos, 1);
-                            //Console.WriteLine(fPrimerStartPair);
+                            fPrimerStartPos -= 1;
+                            fPrimerStartPair = sequence.Substring(fPrimerStartPos, 1);
                         }
                      }
                  }
+                //Add Second Base on MidTemp Start
                 if (fMidTempStart == true)
                 {
-                    fPrimerstartPos -= 1;
-                    fPrimerStartPair = sequence.Substring(fPrimerstartPos, 2);
+                    fPrimerStartPos -= 1;
+                    fPrimerStartPair = sequence.Substring(fPrimerStartPos, 2);
                 }
-
+                //Low Temp Star
                 if (fHighTempStart == false && fMidTempStart == false)
                 {
-                    fPrimerstartPos = firstFPrimerstartPos;
-                    fPrimerStartPair = sequence.Substring(fPrimerstartPos, 2);
+                    fPrimerStartPos = firstFPrimerstartPos;
+                    fPrimerStartPair = sequence.Substring(fPrimerStartPos, 2);
                 }
                 //Unic Check
-                firstSixFBases = sequence.Substring(fPrimerstartPos - 4, 2 + 4);
-                var matches = Regex.Matches(sequence, firstSixFBases);
-                if (matches.Count==1)
+                firstSixFBases = sequence.Substring(fPrimerStartPos - 4, 2 + 4);
+                var matchesF = Regex.Matches(sequence, firstSixFBases);
+                if (matchesF.Count==1)
                 {
                     fUnic = true;
                 }
@@ -169,40 +153,108 @@ namespace PrimerDesigner
                 {
                     throw new Exception("Es konnte kein Unic Primer innerhalb der suchkreterien gefunden werden.");
                 }
-
             }
-            Primer fPrimer = new Primer(sequence.Substring(fPrimerstartPos - 4, 2 + 4), 50, 50);
-            Primer nextFPrimer = new Primer(sequence.Substring(fPrimerstartPos - 4-1, 2 + 4+1), 50, 50);
+            //Create f Primers
+            Primer fPrimer = new Primer(sequence.Substring(fPrimerStartPos - 4, 2 + 4), 50, 50);
+            Primer nextFPrimer = new Primer(sequence.Substring(fPrimerStartPos - 4-1, 2 + 4+1), 50, 50);
             int nextPrimerCounter = 0;
             //Primer verlägern bis Abweichung zu TM minimal
             while (Math.Abs(targetTM - fPrimer.GetNearestNeighbourTemp()) > Math.Abs(targetTM - nextFPrimer.GetNearestNeighbourTemp()))
-            {
-                
-                fPrimer.Sequence = sequence.Substring(fPrimerstartPos - 4 - nextPrimerCounter, 2 + 4 + nextPrimerCounter);
-                nextFPrimer.Sequence = sequence.Substring(fPrimerstartPos - 4 - nextPrimerCounter - 1, 2 + 4 + nextPrimerCounter + 1);
+            {  
+                fPrimer.Sequence = sequence.Substring(fPrimerStartPos - 4 - nextPrimerCounter, 2 + 4 + nextPrimerCounter);
+                nextFPrimer.Sequence = sequence.Substring(fPrimerStartPos - 4 - nextPrimerCounter - 1, 2 + 4 + nextPrimerCounter + 1);
                 nextPrimerCounter++;
             }
+            //Return F Primer
             strReturn[0] = fPrimer.Sequence;
-
-
-            //REV PRIMER 
-
-
-
-
-
-
-
-
-
-
-
-            //strReturn[1] = "PCRR";
+                //REV PRIMER 
+                string firstSixRBases;
+                string rPrimerStartPair;
+                int rPrimerStartPos;
+                int firstRPrimerstartPos;
+                firstRPrimerstartPos = fPrimerStartPos + distanceBetweenPrimer + 2;
+                rPrimerStartPos = firstRPrimerstartPos;
+                rPrimerStartPair = sequence.Substring(rPrimerStartPos, 2);
+            //Loop for search Primer
+            int rUnicCounter = 0;
+            bool rUnic = false;
+            while (rUnic == false)
+            {
+                bool rHighTempStart = false;
+                bool rMidTempStart = false;
+                //Search for 2x high Temp Start
+                for (int i = 0; i < searchStartArea; i++)
+                {
+                    if (rPrimerStartPair == "GG" || rPrimerStartPair == "GC" || rPrimerStartPair == "CG" || rPrimerStartPair == "CC")
+                    {
+                        rHighTempStart = true;
+                        break; 
+                    }
+                    else
+                    {
+                        rPrimerStartPos += 1;
+                        rPrimerStartPair = sequence.Substring(rPrimerStartPos, 2);            
+                    }
+                }
+                //Search for 1x high Temp Start
+                if (rHighTempStart == false)
+                {
+                    rPrimerStartPos = firstRPrimerstartPos;
+                    rPrimerStartPair = sequence.Substring(rPrimerStartPos, 1);
+                    for (int i = 0; i < searchStartArea; i++)
+                    {
+                        if (rPrimerStartPair == "G" || rPrimerStartPair == "C")
+                        {
+                            rMidTempStart = true;
+                            break;
+                        }
+                        else
+                        {
+                            rPrimerStartPos += 1;
+                            rPrimerStartPair = sequence.Substring(rPrimerStartPos, 1);
+                        }
+                    }
+                }
+                //Add Second Base on MidTemp Start
+                if (rMidTempStart == true)
+                {
+                    rPrimerStartPair = sequence.Substring(rPrimerStartPos, 2);
+                }
+                //Low Temp Star
+                if (rHighTempStart == false && rMidTempStart == false)
+                {
+                    rPrimerStartPos = firstRPrimerstartPos;
+                    rPrimerStartPair = sequence.Substring(rPrimerStartPos, 2);
+                }
+                //Unic Check
+                firstSixRBases = sequence.Substring(rPrimerStartPos, 2 + 4);
+                var matchesR = Regex.Matches(sequence, firstSixRBases);
+                if (matchesR.Count == 1)
+                {
+                    rUnic = true;
+                }
+                firstRPrimerstartPos--;
+                rUnicCounter++;
+                if (rUnicCounter == searchStartArea)
+                {
+                    throw new Exception("Es konnte kein Unic Primer innerhalb der suchkreterien gefunden werden.");
+                }
+            }
+            //Create r Primers
+            Primer rPrimer = new Primer(sequence.Substring(rPrimerStartPos, 2 + 4), 50, 50);
+            Primer nextRPrimer = new Primer(sequence.Substring(rPrimerStartPos, 2 + 4 + 1), 50, 50);
+            int nextRPrimerCounter = 0;
+            //Primer verlägern bis Abweichung zu TM minimal
+            while (Math.Abs(targetTM - rPrimer.GetNearestNeighbourTemp()) > Math.Abs(targetTM - nextRPrimer.GetNearestNeighbourTemp()))
+            {
+                rPrimer.Sequence = sequence.Substring(rPrimerStartPos , 2 + 4 + nextRPrimerCounter);
+                nextRPrimer.Sequence = sequence.Substring(rPrimerStartPos , 2 + 4 + nextRPrimerCounter + 1);
+                nextRPrimerCounter++;
+            }
+            //Return R Primer
+            strReturn[1] = rPrimer.Sequence;
             return strReturn;
         }
-
-
-
-     }
+    }
  }
 

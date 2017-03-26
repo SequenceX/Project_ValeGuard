@@ -30,7 +30,7 @@ namespace PrimerDesigner
             GeneSequence seq1 = null;
             try
             {
-                seq1 = new GeneSequence("aTaacactgATATATATATATATATATATATATATATATATATATATATATAcTgAgTgAgTcATcATATaaactggATATATATattaATAaaTAatttaTaaATATATATATATATATATtatatatatatatatatatatatatatatatATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATA");
+                seq1 = new GeneSequence("aTaacactgATATATATATATATATATATATATATATATATATATATATATAcTgAgTgAgTcATcATATaaactggATATATATattaATAaaTAatttaTaaATATATATATATATATATtatatatatatatatatatatatatatatatATATATaaaagaaaaaaATATATATATATATgcccTAcTATcATcATccATAcgcATATATAccccccTATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATA");
             }
             catch (Exception exc)
             {
@@ -42,11 +42,15 @@ namespace PrimerDesigner
 
 
 
-
+            string[] outputPrimer=new string[2];
             try
             {
-                Console.WriteLine("F_Primer Seq: "+seq1.GetGenestrandSeqPrimer(90, 120, 1000,30)[0]);//Output ist ein array. [0] wird ausgegeben =Primer F
-                Console.WriteLine(seq1.GetGenestrandSeqPrimer(90, 120, 1000,20)[1]);//Output ist ein array. [0] wird ausgegeben =Primer R
+                outputPrimer= seq1.GetGenestrandSeqPrimer(90, 120, 1000, 30);
+
+
+
+                Console.WriteLine("F_Primer Seq: "+ outputPrimer[0]);
+                Console.WriteLine("R_Primer Seq: "+ outputPrimer[1]);
             }
             catch (Exception exc)
             {
@@ -56,15 +60,9 @@ namespace PrimerDesigner
             }
 
 
-            //Console.WriteLine(seq1.GetGenestrandSeqPrimer(250,120,1000)[0]);//Output ist ein array. [0] wird ausgegeben =Primer F
-            // Console.WriteLine( seq1.GetGenestrandSeqPrimer()[1]);//Output ist ein array. [1] wird ausgegeben =Primer R
-            //Console.WriteLine(seq1.CheckForDnaChar());
 
 
 
-
-            Console.WriteLine("End of Test");
-            //Console.WriteLine(seq1.Sequence.IndexOf();
             Console.WriteLine("End of Test");
 
             Console.ReadKey();
