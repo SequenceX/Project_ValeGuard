@@ -11,9 +11,10 @@ namespace PrimerDesigner
     {
 // Diese Klasse benötigt Klasse Primer zur berechnung der TM.
         //Konstruktor
-        public GeneSequence(string DNASequence)
+        public GeneSequence(string DNASequence,string SequenceName)
         {
             this.sequence = DNASequence.ToUpper();
+            this.seqName = SequenceName;
             this.länge = sequence.Length;
             if (!this.CheckForDnaChar())
             {
@@ -41,6 +42,12 @@ namespace PrimerDesigner
         {
             get
             { return länge; }
+        }
+        private string seqName;
+        public string SeqName
+        {
+            get
+            { return seqName; }
         }
         //Methoden
         public bool CheckForDnaChar()
