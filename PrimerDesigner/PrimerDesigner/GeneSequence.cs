@@ -259,6 +259,7 @@ namespace PrimerDesigner
                 nextRPrimerCounter++;
             }
             //Return R Primer
+            rPrimer.Sequence = rPrimer.GetReverseComplement();
             strReturn[1] = rPrimer.Sequence;
             return strReturn;
         }
