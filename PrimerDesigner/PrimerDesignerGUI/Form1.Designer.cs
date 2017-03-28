@@ -36,6 +36,8 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.richTextBox7 = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.richTextBox6 = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -49,8 +51,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.richTextBox7 = new System.Windows.Forms.RichTextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -64,7 +66,7 @@
             this.listBox1.ItemHeight = 16;
             this.listBox1.Location = new System.Drawing.Point(97, 6);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(213, 212);
+            this.listBox1.Size = new System.Drawing.Size(213, 180);
             this.listBox1.TabIndex = 0;
             // 
             // tabControl1
@@ -80,6 +82,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button4);
+            this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.progressBar1);
             this.tabPage1.Controls.Add(this.listBox2);
             this.tabPage1.Controls.Add(this.button1);
@@ -108,7 +112,7 @@
             this.listBox2.ItemHeight = 16;
             this.listBox2.Location = new System.Drawing.Point(7, 6);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(73, 212);
+            this.listBox2.Size = new System.Drawing.Size(73, 180);
             this.listBox2.TabIndex = 2;
             // 
             // button1
@@ -146,6 +150,25 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(91, 208);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(108, 17);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Output Directory:";
+            // 
+            // richTextBox7
+            // 
+            this.richTextBox7.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox7.Location = new System.Drawing.Point(47, 229);
+            this.richTextBox7.Name = "richTextBox7";
+            this.richTextBox7.Size = new System.Drawing.Size(213, 26);
+            this.richTextBox7.TabIndex = 14;
+            this.richTextBox7.Text = "";
             // 
             // label6
             // 
@@ -225,7 +248,6 @@
             // 
             // button2
             // 
-            this.button2.Enabled = false;
             this.button2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(46, 261);
             this.button2.Name = "button2";
@@ -233,6 +255,7 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "Save Settings";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
@@ -272,24 +295,27 @@
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "50";
             // 
-            // label7
+            // button3
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(91, 208);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(108, 17);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Output Directory:";
+            this.button3.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(7, 192);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(73, 25);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Delete";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // richTextBox7
+            // button4
             // 
-            this.richTextBox7.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox7.Location = new System.Drawing.Point(47, 229);
-            this.richTextBox7.Name = "richTextBox7";
-            this.richTextBox7.Size = new System.Drawing.Size(213, 26);
-            this.richTextBox7.TabIndex = 14;
-            this.richTextBox7.Text = "GET DESKTOP PFAD";
+            this.button4.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(97, 192);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(210, 25);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "Delete";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
@@ -332,6 +358,8 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.RichTextBox richTextBox7;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
     }
 }
 

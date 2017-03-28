@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+
 
 namespace PrimerDesignerGUI
 {
@@ -23,6 +26,7 @@ namespace PrimerDesignerGUI
            System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox2.DragEnter += new
            System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
+            readInSettings();
         }
         private void listBox1_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
         {
@@ -108,6 +112,84 @@ namespace PrimerDesignerGUI
                 i++;
             }
         Ende:;
+        }
+        private void button3_Click(object sender, EventArgs e) 
+        {//Delete selecte Items selecte in Listbox2
+            int x=0;
+            try
+            {
+                x = listBox2.SelectedIndex;
+                listBox1.Items.RemoveAt(x);
+                listBox2.Items.RemoveAt(x);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Es wurde nichts zum löschen ausgewält.");
+            }
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {//Delete selecte Items selecte in Listbox1
+            int x = 0;
+            try
+            {
+                x = listBox1.SelectedIndex;
+                listBox1.Items.RemoveAt(x);
+                listBox2.Items.RemoveAt(x);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Es wurde nichts zum löschen ausgewält.");
+            }
+        }
+
+
+
+
+        private void readInSettings()
+        {
+            string documentsFolderPath;
+            string desktopFolderPath;
+            string StrandsPrimerMakerINI = @"StrandsPrimerMaker.ini";
+            documentsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string iniPath = documentsFolderPath + @"\" + StrandsPrimerMakerINI;
+            desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            if (!File.Exists(iniPath))
+            {
+                //create start INI
+                IniFile ini = new IniFile(iniPath);
+                ini.IniWriteValue("Settings", "PrimerConcentration", richTextBox1.Text);
+                ini.IniWriteValue("Settings", "SaltConcentration", richTextBox2.Text);
+                ini.IniWriteValue("Settings", "DistanceBetweenPrimer", richTextBox4.Text);
+                ini.IniWriteValue("Settings", "SearchArea", richTextBox3.Text);
+                ini.IniWriteValue("Settings", "MinSeqLength", richTextBox5.Text);
+                ini.IniWriteValue("Settings", "MaxSeqLength", richTextBox6.Text);
+                ini.IniWriteValue("Settings", "OutputDirectory", desktopFolderPath);
+                richTextBox7.Text = desktopFolderPath;
+            }
+            else
+            {
+                //Read in settings
+                IniFile ini = new IniFile(iniPath);
+                richTextBox1.Text = ini.IniReadValue("Settings", "PrimerConcentration");
+                richTextBox2.Text = ini.IniReadValue("Settings", "SaltConcentration");
+                richTextBox4.Text = ini.IniReadValue("Settings", "DistanceBetweenPrimer");
+                richTextBox3.Text = ini.IniReadValue("Settings", "SearchArea");
+                richTextBox5.Text = ini.IniReadValue("Settings", "MinSeqLength");
+                richTextBox6.Text = ini.IniReadValue("Settings", "MaxSeqLength");
+                richTextBox7.Text = ini.IniReadValue("Settings", "OutputDirectory");
+            }
+        }
+
+
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+
+     
+            
+
         }
     }
 }
