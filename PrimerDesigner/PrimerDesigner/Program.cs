@@ -30,7 +30,7 @@ namespace PrimerDesigner
             GeneSequence seq1 = null;
             try
             {
-                seq1 = new GeneSequence("aTaacactgATATATATATATATATATATATATATATATATATATATATATAcTgAgTgAgTcATcATATaaactggATATATATattaATAaaTAatttaTaaATATATATATATATATATtatatatatatatatatatatatatatatatATATATaaaagaaaaaaATATATATATATATgcccTAcTATcATcATccATAcgcATATATAccccccTATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATA");
+                seq1 = new GeneSequence("aTaacactgATATATATATATATATATATATATATATATATATATATATATAcTgAgTgAgTcATcATATaaactggATATATATattaATAaaTAatttaTaaATATATATATATATATATtatatatatatatatatatatatatatatatATATATaaaagaaaaaaATATATATATATATgcccTAcTATcATcATccATAcgcATATATAccccccTATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATA","TEST1");
             }
             catch (Exception exc)
             {
@@ -51,6 +51,8 @@ namespace PrimerDesigner
 
                 Console.WriteLine("F_Primer Seq: "+ outputPrimer[0]);
                 Console.WriteLine("R_Primer Seq: "+ outputPrimer[1]);
+                Primer PrimerTest = new Primer(outputPrimer[0], 50, 50);
+                PrimerTest.CreateSeqFile("TEST_F1", @"C:\Users\USER\Desktop");// PFAD ANPASSEN
             }
             catch (Exception exc)
             {
