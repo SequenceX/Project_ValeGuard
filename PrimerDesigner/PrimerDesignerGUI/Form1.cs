@@ -107,7 +107,14 @@ namespace PrimerDesignerGUI
             while (i < pathArray.Length)
             {
 
+
+                //Prüfung bei eingabe der Settingswerte ob diese Zahlen sind etc
+
                 //HIER ERSTELLUNG DER PRIMER EINFÜGEN
+
+
+
+
                 progressBar1.Value= progressBar1.Value+1;
                 i++;
             }
@@ -190,6 +197,42 @@ namespace PrimerDesignerGUI
      
             
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //Default Settings
+            richTextBox1.Text = "50";
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //Default Settings
+            richTextBox2.Text = "50";
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //Default Settings
+            richTextBox4.Text = "90";
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //Default Settings
+            richTextBox3.Text = "30";
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //Default Settings
+            richTextBox5.Text = "160";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //Default Settings
+            richTextBox6.Text = "1000";
         }
     }
 }
