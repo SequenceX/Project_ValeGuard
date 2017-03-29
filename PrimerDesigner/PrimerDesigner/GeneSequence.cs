@@ -98,9 +98,21 @@ namespace PrimerDesigner
                 for (int i = 0; i < searchStartArea; i++)
                 {
                     if (fPrimerStartPair == "GG" || fPrimerStartPair == "GC" || fPrimerStartPair == "CG" || fPrimerStartPair == "CC")
-                    {
-                        fHighTempStart = true;
-                        break; 
+                    {  
+                        //Unic Check
+                        firstSixFBases = sequence.Substring(fPrimerStartPos - 4, 2 + 4);
+                        var matchesHighF = Regex.Matches(sequence, firstSixFBases);
+                        if (matchesHighF.Count == 1)
+                        {
+                            fHighTempStart = true;
+                            fUnic = true;
+                            break;
+                        }
+                        else
+                        {
+                            fPrimerStartPos -= 1;
+                            fPrimerStartPair = sequence.Substring(fPrimerStartPos, 2);
+                        }
                     }
                     else
                     {
@@ -117,9 +129,19 @@ namespace PrimerDesigner
                     {
                         if (fPrimerStartPair == "G" || fPrimerStartPair == "C" )
                         {
-                            // Console.WriteLine(fPrimerStartPair);
-                            fMidTempStart = true;
-                            break;
+                            firstSixFBases = sequence.Substring(fPrimerStartPos - 4, 2 + 4);
+                            var matchesMidF = Regex.Matches(sequence, firstSixFBases);
+                            if (matchesMidF.Count == 1)
+                            {
+                                fMidTempStart = true;
+                                fUnic = true;
+                                break;
+                            }
+                            else
+                            {
+                                fPrimerStartPos -= 1;
+                                fPrimerStartPair = sequence.Substring(fPrimerStartPos, 1);
+                            }
                         }
                         else
                         {
@@ -187,6 +209,19 @@ namespace PrimerDesigner
                 {
                     if (rPrimerStartPair == "GG" || rPrimerStartPair == "GC" || rPrimerStartPair == "CG" || rPrimerStartPair == "CC")
                     {
+                        firstSixRBases = sequence.Substring(rPrimerStartPos, 2 + 4);
+                        var matchesHighR = Regex.Matches(sequence, firstSixRBases);
+                        if (matchesHighR.Count == 1)
+                        {
+                            rHighTempStart = true;
+                            rUnic = true;
+                            break;
+                        }
+                        else
+                        {
+                            rPrimerStartPos -= 1;
+                            rPrimerStartPair = sequence.Substring(rPrimerStartPos, 2);
+                        }
                         rHighTempStart = true;
                         break; 
                     }
@@ -205,8 +240,19 @@ namespace PrimerDesigner
                     {
                         if (rPrimerStartPair == "G" || rPrimerStartPair == "C")
                         {
-                            rMidTempStart = true;
-                            break;
+                            firstSixRBases = sequence.Substring(rPrimerStartPos, 2 + 4);
+                            var matchesMidR = Regex.Matches(sequence, firstSixRBases);
+                            if (matchesMidR.Count == 1)
+                            {
+                                rMidTempStart = true;
+                                rUnic = true;
+                                break;
+                            }
+                            else
+                            {
+                                rPrimerStartPos -= 1;
+                                rPrimerStartPair = sequence.Substring(rPrimerStartPos, 2);
+                            }
                         }
                         else
                         {
