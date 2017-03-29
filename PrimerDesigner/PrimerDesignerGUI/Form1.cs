@@ -85,6 +85,12 @@ namespace PrimerDesignerGUI
             int i=0;
             var path = new List<string>();
             var geneName = new List<string>();
+            //Check for Directory
+            if (!Directory.Exists(richTextBox7.Text))
+            {
+                MessageBox.Show("Der angegebene Output Pfad existiert nicht");
+                goto Ende;
+            }
             foreach (object inlistbox in listBox1.Items)
             {
                 //MessageBox.Show(inlistbox.ToString());
@@ -148,10 +154,6 @@ namespace PrimerDesignerGUI
                 MessageBox.Show("Es wurde nichts zum löschen ausgewält.");
             }
         }
-
-
-
-
         private void readInSettings()
         {
             string documentsFolderPath;
@@ -192,11 +194,19 @@ namespace PrimerDesignerGUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-
-     
-            
-
+            //Save INI
+            string documentsFolderPath;
+            string StrandsPrimerMakerINI = @"StrandsPrimerMaker.ini";
+            documentsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string iniPath = documentsFolderPath + @"\" + StrandsPrimerMakerINI;
+            IniFile ini = new IniFile(iniPath);
+            ini.IniWriteValue("Settings", "PrimerConcentration", richTextBox1.Text);
+            ini.IniWriteValue("Settings", "SaltConcentration", richTextBox2.Text);
+            ini.IniWriteValue("Settings", "DistanceBetweenPrimer", richTextBox4.Text);
+            ini.IniWriteValue("Settings", "SearchArea", richTextBox3.Text);
+            ini.IniWriteValue("Settings", "MinSeqLength", richTextBox5.Text);
+            ini.IniWriteValue("Settings", "MaxSeqLength", richTextBox6.Text);
+            ini.IniWriteValue("Settings", "OutputDirectory", richTextBox7.Text);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -204,35 +214,98 @@ namespace PrimerDesignerGUI
             //Default Settings
             richTextBox1.Text = "50";
         }
-
         private void button6_Click(object sender, EventArgs e)
         {
             //Default Settings
             richTextBox2.Text = "50";
         }
-
         private void button7_Click(object sender, EventArgs e)
         {
             //Default Settings
             richTextBox4.Text = "90";
         }
-
         private void button8_Click(object sender, EventArgs e)
         {
             //Default Settings
             richTextBox3.Text = "30";
         }
-
         private void button9_Click(object sender, EventArgs e)
         {
             //Default Settings
             richTextBox5.Text = "160";
         }
-
         private void button10_Click(object sender, EventArgs e)
         {
             //Default Settings
             richTextBox6.Text = "1000";
         }
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            // TRYPARSE methode to convert string input zu INT
+            int output;
+            int.TryParse(richTextBox1.Text, out output);
+            if (output==0)
+            {
+                MessageBox.Show("Input must be a number >0");
+                richTextBox1.Text = "50";
+            }
+        }
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
+        {
+            // TRYPARSE methode to convert string input zu INT
+            int output;
+            int.TryParse(richTextBox2.Text, out output);
+            if (output == 0)
+            {
+                MessageBox.Show("Input must be a number >0");
+                richTextBox2.Text = "50";
+            }
+        }
+        private void richTextBox3_TextChanged(object sender, EventArgs e)
+        {
+            // TRYPARSE methode to convert string input zu INT
+            int output;
+            int.TryParse(richTextBox3.Text, out output);
+            if (output == 0)
+            {
+                MessageBox.Show("Input must be a number >0");
+                richTextBox3.Text = "30";
+            }
+        }
+        private void richTextBox4_TextChanged(object sender, EventArgs e)
+        {
+            // TRYPARSE methode to convert string input zu INT
+            int output;
+            int.TryParse(richTextBox4.Text, out output);
+            if (output == 0)
+            {
+                MessageBox.Show("Input must be a number >0");
+                richTextBox4.Text = "90";
+            }
+        }
+        private void richTextBox5_TextChanged(object sender, EventArgs e)
+        {
+            // TRYPARSE methode to convert string input zu INT
+            int output;
+            int.TryParse(richTextBox5.Text, out output);
+            if (output == 0)
+            {
+                MessageBox.Show("Input must be a number >0");
+                richTextBox5.Text = "160";
+            }
+        }
+        private void richTextBox6_TextChanged(object sender, EventArgs e)
+        {
+            // TRYPARSE methode to convert string input zu INT
+            int output;
+            int.TryParse(richTextBox6.Text, out output);
+            if (output == 0)
+            {
+                MessageBox.Show("Input must be a number >0");
+                richTextBox6.Text = "1000";
+            }
+        }
+
+
     }
 }
