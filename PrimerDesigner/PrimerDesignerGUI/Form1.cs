@@ -188,10 +188,6 @@ namespace PrimerDesignerGUI
                 richTextBox7.Text = ini.IniReadValue("Settings", "OutputDirectory");
             }
         }
-
-
-
-
         private void button2_Click(object sender, EventArgs e)
         {
             //Save INI
@@ -208,7 +204,6 @@ namespace PrimerDesignerGUI
             ini.IniWriteValue("Settings", "MaxSeqLength", richTextBox6.Text);
             ini.IniWriteValue("Settings", "OutputDirectory", richTextBox7.Text);
         }
-
         private void button5_Click(object sender, EventArgs e)
         {
             //Default Settings
