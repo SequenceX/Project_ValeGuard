@@ -52,7 +52,7 @@ namespace PrimerDesigner
                 Console.WriteLine("F_Primer Seq: "+ outputPrimer[0]);
                 Console.WriteLine("R_Primer Seq: "+ outputPrimer[1]);
                 Primer PrimerTest = new Primer(outputPrimer[0], 50, 50);
-                PrimerTest.CreateSeqFile("TEST_F1", @"C:\Users\USER\Desktop");// PFAD ANPASSEN
+                PrimerTest.CreateSeqFile("TEST_F1", @"C:\Users\Florian\Desktop");// PFAD ANPASSEN
             }
             catch (Exception exc)
             {
@@ -61,6 +61,13 @@ namespace PrimerDesigner
                 return 0;
             }
 
+
+
+
+
+            Console.WriteLine("End of Test1");
+
+            Console.WriteLine(seq1.ReadInSeqFile(@"C:\Users\Florian\Desktop\SEQ1.txt"));
 
 
 

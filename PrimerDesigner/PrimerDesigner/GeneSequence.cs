@@ -327,6 +327,15 @@ namespace PrimerDesigner
             File.Delete(newPath); // Delete the existing file if exists
             File.Move(path, newPath); // Rename the oldFileName into newFileName
         }
+        public string ReadInSeqFile(string Path)
+        {
+            string documentsFolderPath;
+            documentsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            File.Copy(Path,documentsFolderPath + @"\PrimerCreatingReadIn.txt",true);
+            string ReadIN = File.ReadAllText(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
+            File.Delete(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
+            return ReadIN;
+        }
     }
  }
 
