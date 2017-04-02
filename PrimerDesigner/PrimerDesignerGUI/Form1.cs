@@ -93,34 +93,48 @@ namespace PrimerDesignerGUI
             }
             foreach (object inlistbox in listBox1.Items)
             {
-                //MessageBox.Show(inlistbox.ToString());
+                //CHECK FOR .SEQ FEHLT NOCH
+
                 path.Add(inlistbox.ToString());
             }
             foreach (object inlistbox in listBox2.Items)
             {
-                //MessageBox.Show(inlistbox.ToString());
+                //CHECK FOR .SEQ FEHLT NOCH
+
                 geneName.Add(inlistbox.ToString());
             }
-            var pathArray = path.ToArray();
-            var geneNameArray = geneName.ToArray();
+            string[] pathArray = path.ToArray();
+            string[] geneNameArray = geneName.ToArray();
             if (geneNameArray.Length==0)
             {
                 MessageBox.Show("Es wurden keine Sequenzen ausgewählt.");
                 goto Ende;
-            } 
+            }
+            int primerConcentraion;
+            int.TryParse(richTextBox1.Text, out primerConcentraion);
+            int saltConcentration;
+            int.TryParse(richTextBox2.Text, out saltConcentration);
+            int distanceBetweenPrimer;
+            int.TryParse(richTextBox4.Text, out distanceBetweenPrimer);
+            int searchArea;
+            int.TryParse(richTextBox3.Text, out searchArea);
+            int minSeqLength;
+            int.TryParse(richTextBox5.Text, out minSeqLength);
+            int maxSeqLength;
+            int.TryParse(richTextBox6.Text, out maxSeqLength);
             progressBar1.Maximum = pathArray.Length;
             progressBar1.Value = 0;
+            string[] outputPrimer = new string[2];
+            GeneSequence[] StrandSeq = new GeneSequence[pathArray.Length];
             while (i < pathArray.Length)
             {
 
-
-                //Prüfung bei eingabe der Settingswerte ob diese Zahlen sind etc
-
-                //HIER ERSTELLUNG DER PRIMER EINFÜGEN
-
-
-
-
+                StrandSeq[i] = new GeneSequence(GeneSequence.ReadInSeqFile(pathArray[i]), geneNameArray[i]);
+                outputPrimer = StrandSeq[i].GetGenestrandSeqPrimer(distanceBetweenPrimer, minSeqLength, maxSeqLength, searchArea);
+                Primer SeqF1 = new Primer(outputPrimer[0], primerConcentraion, saltConcentration);
+                Primer SeqR1 = new Primer(outputPrimer[1], primerConcentraion, saltConcentration);
+                SeqF1.CreateSeqFile(geneNameArray[i] + "_SqF1", richTextBox7.Text);
+                SeqR1.CreateSeqFile(geneNameArray[i] + "_SqR1", richTextBox7.Text);
                 progressBar1.Value= progressBar1.Value+1;
                 i++;
             }
