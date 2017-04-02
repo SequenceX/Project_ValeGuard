@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -308,6 +309,23 @@ namespace PrimerDesigner
             rPrimer.Sequence = rPrimer.GetReverseComplement();
             strReturn[1] = rPrimer.Sequence;
             return strReturn;
+        }
+        public void CreateSeqFile(string NameOfSeq, string SaveToPath)
+        {
+            string path = SaveToPath + @"\" + NameOfSeq + ".txt"; //@"c:\temp\MyTest.txt";
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine(sequence);
+                    //sw.WriteLine("...");
+                    //sw.WriteLine("...");
+                }
+            }
+            string newPath = SaveToPath + @"\" + NameOfSeq + ".seq";
+            File.Delete(newPath); // Delete the existing file if exists
+            File.Move(path, newPath); // Rename the oldFileName into newFileName
         }
     }
  }
