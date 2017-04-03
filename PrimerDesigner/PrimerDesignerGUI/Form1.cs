@@ -126,15 +126,30 @@ namespace PrimerDesignerGUI
             progressBar1.Value = 0;
             string[] outputPrimer = new string[2];
             GeneSequence[] StrandSeq = new GeneSequence[pathArray.Length];
+            Primer[] SeqF1 = new Primer[pathArray.Length];
+            Primer[] SeqR1 = new Primer[pathArray.Length];
             while (i < pathArray.Length)
             {
 
-                StrandSeq[i] = new GeneSequence(GeneSequence.ReadInSeqFile(pathArray[i]), geneNameArray[i]);
-                outputPrimer = StrandSeq[i].GetGenestrandSeqPrimer(distanceBetweenPrimer, minSeqLength, maxSeqLength, searchArea);
-                Primer SeqF1 = new Primer(outputPrimer[0], primerConcentraion, saltConcentration);
-                Primer SeqR1 = new Primer(outputPrimer[1], primerConcentraion, saltConcentration);
-                SeqF1.CreateSeqFile(geneNameArray[i] + "_SqF1", richTextBox7.Text);
-                SeqR1.CreateSeqFile(geneNameArray[i] + "_SqR1", richTextBox7.Text);
+
+                try
+                {
+                    StrandSeq[i] = new GeneSequence(GeneSequence.ReadInSeqFile(pathArray[i]), geneNameArray[i]);
+                    outputPrimer = StrandSeq[i].GetGenestrandSeqPrimer(distanceBetweenPrimer, minSeqLength, maxSeqLength, searchArea);
+                    SeqF1[i] = new Primer(outputPrimer[0], primerConcentraion, saltConcentration);
+                    SeqR1[i] = new Primer(outputPrimer[1], primerConcentraion, saltConcentration);
+                    SeqF1[i].CreateSeqFile(geneNameArray[i] + "_SqF1", richTextBox7.Text);
+                    SeqR1[i].CreateSeqFile(geneNameArray[i] + "_SqR1", richTextBox7.Text);
+                    StrandSeq[i] = null;
+                    SeqF1[i] = null;
+                    SeqR1[i] = null;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message);
+                }
+
+                
                 progressBar1.Value= progressBar1.Value+1;
                 i++;
             }
