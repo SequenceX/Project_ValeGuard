@@ -331,15 +331,22 @@ namespace PrimerDesignerGUI
         {
             string documentsFolderPath;
             documentsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            File.Copy(Path,documentsFolderPath + @"\PrimerCreatingReadIn.txt",true);
-            string ReadIN = File.ReadAllText(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
-            File.Delete(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
-            if (ReadIN.IndexOf("^^") != -1)//SUCHMUSTER AN ECHTES ANPASSEN
+            string checkPath = Path.ToLower();
+            if (checkPath.IndexOf(".seq") == -1)
             {
-                ReadIN = ReadIN.Substring(ReadIN.IndexOf("^^")+3);//VERSCHIEBUNG AN SUCHMUSTER ANPASSEN
+                throw new Exception("Die Datein ist keine .SEQ Datei.");
             }
-
-            return ReadIN;
+            else
+            {
+                File.Copy(Path, documentsFolderPath + @"\PrimerCreatingReadIn.txt", true);
+                string ReadIN = File.ReadAllText(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
+                File.Delete(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
+                if (ReadIN.IndexOf("^^") != -1)//SUCHMUSTER AN ECHTES ANPASSEN
+                {
+                    ReadIN = ReadIN.Substring(ReadIN.IndexOf("^^") + 3);//VERSCHIEBUNG AN SUCHMUSTER ANPASSEN
+                }
+                return ReadIN;
+            }
         }
     }
  }
