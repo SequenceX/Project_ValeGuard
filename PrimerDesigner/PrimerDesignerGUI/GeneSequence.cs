@@ -334,6 +334,11 @@ namespace PrimerDesignerGUI
             File.Copy(Path,documentsFolderPath + @"\PrimerCreatingReadIn.txt",true);
             string ReadIN = File.ReadAllText(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
             File.Delete(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
+            if (ReadIN.IndexOf("^^") != -1)//SUCHMUSTER AN ECHTES ANPASSEN
+            {
+                ReadIN = ReadIN.Substring(ReadIN.IndexOf("^^")+3);//VERSCHIEBUNG AN SUCHMUSTER ANPASSEN
+            }
+
             return ReadIN;
         }
     }
