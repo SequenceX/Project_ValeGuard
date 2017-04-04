@@ -339,12 +339,20 @@ namespace PrimerDesignerGUI
             else
             {
                 File.Copy(Path, documentsFolderPath + @"\PrimerCreatingReadIn.txt", true);
-                string ReadIN = File.ReadAllText(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
-                File.Delete(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
-                if (ReadIN.IndexOf("^^") != -1)//SUCHMUSTER AN ECHTES ANPASSEN
+                //string ReadIN = File.ReadAllText(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
+                string ReadIN="";
+                using (StreamReader sr = new StreamReader(Path))
                 {
-                    ReadIN = ReadIN.Substring(ReadIN.IndexOf("^^") + 3);//VERSCHIEBUNG AN SUCHMUSTER ANPASSEN
+                    while (sr.Peek() >= 0)
+                    {
+                        ReadIN=sr.ReadLine();
+                    }
                 }
+                File.Delete(documentsFolderPath + @"\PrimerCreatingReadIn.txt");
+                //if (ReadIN.IndexOf("^^") != -1)//SUCHMUSTER AN ECHTES ANPASSEN  //NOT USED, Only Read in Last Line fixed Problem
+                //{
+                //    ReadIN = ReadIN.Substring(ReadIN.IndexOf("^^") + 3);//VERSCHIEBUNG AN SUCHMUSTER ANPASSEN
+                //}
                 return ReadIN;
             }
         }
