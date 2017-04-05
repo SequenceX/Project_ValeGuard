@@ -183,6 +183,11 @@ namespace PrimerDesignerGUI
                 MessageBox.Show("Es wurde nichts zum löschen ausgewält.");
             }
         }
+        private void button11_Click(object sender, EventArgs e)
+        {//delete all Items in Listbox 1 and 2
+            listBox1.Items.Clear();
+            listBox2.Items.Clear();
+        }
         private void readInSettings()
         {
             string documentsFolderPath;

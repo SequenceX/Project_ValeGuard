@@ -59,6 +59,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button11 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -72,7 +73,7 @@
             this.listBox1.ItemHeight = 16;
             this.listBox1.Location = new System.Drawing.Point(97, 6);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(213, 180);
+            this.listBox1.Size = new System.Drawing.Size(213, 148);
             this.listBox1.TabIndex = 0;
             // 
             // tabControl1
@@ -88,6 +89,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button11);
             this.tabPage1.Controls.Add(this.button4);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.progressBar1);
@@ -105,7 +107,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(97, 192);
+            this.button4.Location = new System.Drawing.Point(98, 160);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(210, 25);
             this.button4.TabIndex = 5;
@@ -116,7 +118,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(7, 192);
+            this.button3.Location = new System.Drawing.Point(8, 160);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(73, 25);
             this.button3.TabIndex = 4;
@@ -140,7 +142,7 @@
             this.listBox2.ItemHeight = 16;
             this.listBox2.Location = new System.Drawing.Point(7, 6);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(73, 180);
+            this.listBox2.Size = new System.Drawing.Size(73, 148);
             this.listBox2.TabIndex = 2;
             // 
             // button1
@@ -395,6 +397,17 @@
             this.richTextBox1.Text = "50";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
+            // button11
+            // 
+            this.button11.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button11.Location = new System.Drawing.Point(8, 192);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(299, 25);
+            this.button11.TabIndex = 6;
+            this.button11.Text = "Clear all";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,6 +457,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button11;
     }
 }
 
