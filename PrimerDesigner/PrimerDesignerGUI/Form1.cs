@@ -138,6 +138,7 @@ namespace PrimerDesignerGUI
             GeneSequence[] StrandSeq = new GeneSequence[pathArray.Length];
             Primer[] SeqF1 = new Primer[pathArray.Length];
             Primer[] SeqR1 = new Primer[pathArray.Length];
+            string SaveToPath;
             while (i < pathArray.Length)
             {
 
@@ -148,8 +149,18 @@ namespace PrimerDesignerGUI
                     outputPrimer = StrandSeq[i].GetGenestrandSeqPrimer(distanceBetweenPrimer, minSeqLength, maxSeqLength, searchArea);
                     SeqF1[i] = new Primer(outputPrimer[0], primerConcentraion, saltConcentration);
                     SeqR1[i] = new Primer(outputPrimer[1], primerConcentraion, saltConcentration);
-                    SeqF1[i].CreateSeqFile(geneNameArray[i] + "_SqF1", richTextBox7.Text);
-                    SeqR1[i].CreateSeqFile(geneNameArray[i] + "_SqR1", richTextBox7.Text);
+                    if (!Directory.Exists(richTextBox7.Text + "\\" + StrandSeq[i].SeqName))
+                    {
+                        Directory.CreateDirectory(richTextBox7.Text + "\\" + StrandSeq[i].SeqName);
+                    }
+                    SeqF1[i].CreateSeqFile(geneNameArray[i] + "_SqF1", richTextBox7.Text + "\\" + StrandSeq[i].SeqName);
+                    SeqR1[i].CreateSeqFile(geneNameArray[i] + "_SqR1", richTextBox7.Text + "\\" + StrandSeq[i].SeqName);
+                     SaveToPath = richTextBox7.Text + "\\" + StrandSeq[i].SeqName + @"\" + StrandSeq[i].SeqName + "-ECOM Order.txt"; //@"c:\temp\MyTest.txt";
+                        using (StreamWriter sw = File.CreateText(SaveToPath))
+                        {
+                            sw.WriteLine(StrandSeq[i].SeqName + "_SqF1\t" + SeqF1[i].Sequence);
+                            sw.WriteLine(StrandSeq[i].SeqName + "_SqR1\t" + SeqR1[i].Sequence);
+                        }
                     StrandSeq[i] = null;
                     SeqF1[i] = null;
                     SeqR1[i] = null;
@@ -164,6 +175,7 @@ namespace PrimerDesignerGUI
                 i++;
             }
         Ende:;
+            GC.Collect();
         }
         private void button3_Click(object sender, EventArgs e) 
         {//Delete selecte Items selecte in Listbox2
