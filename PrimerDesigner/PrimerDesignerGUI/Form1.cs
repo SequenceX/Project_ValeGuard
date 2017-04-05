@@ -139,7 +139,8 @@ namespace PrimerDesignerGUI
             Primer[] SeqF1 = new Primer[pathArray.Length];
             Primer[] SeqR1 = new Primer[pathArray.Length];
             string SaveToPath;
-            while (i < pathArray.Length)
+            using (StreamWriter sw2 = File.CreateText(richTextBox7.Text + "\\ECOM Order for All Fragments.txt" ))
+                while (i < pathArray.Length)
             {
 
 
@@ -160,6 +161,8 @@ namespace PrimerDesignerGUI
                         {
                             sw.WriteLine(StrandSeq[i].SeqName + "_SqF1\t" + SeqF1[i].Sequence);
                             sw.WriteLine(StrandSeq[i].SeqName + "_SqR1\t" + SeqR1[i].Sequence);
+                            sw2.WriteLine(StrandSeq[i].SeqName + "_SqF1\t" + SeqF1[i].Sequence);
+                            sw2.WriteLine(StrandSeq[i].SeqName + "_SqR1\t" + SeqR1[i].Sequence);
                         }
                     StrandSeq[i] = null;
                     SeqF1[i] = null;
