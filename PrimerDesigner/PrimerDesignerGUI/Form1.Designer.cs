@@ -32,6 +32,7 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button11 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -59,10 +60,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button11 = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.richTextBox8 = new System.Windows.Forms.RichTextBox();
+            this.button12 = new System.Windows.Forms.Button();
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.button13 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.richTextBox9 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox1
@@ -79,6 +87,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(1, 0);
@@ -101,8 +110,19 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(314, 303);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Primer Creator";
+            this.tabPage1.Text = "Multiple Primer Creator";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button11.Location = new System.Drawing.Point(7, 192);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(300, 25);
+            this.button11.TabIndex = 6;
+            this.button11.Text = "Clear all";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button4
             // 
@@ -260,9 +280,9 @@
             // richTextBox7
             // 
             this.richTextBox7.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox7.Location = new System.Drawing.Point(47, 229);
+            this.richTextBox7.Location = new System.Drawing.Point(7, 228);
             this.richTextBox7.Name = "richTextBox7";
-            this.richTextBox7.Size = new System.Drawing.Size(213, 26);
+            this.richTextBox7.Size = new System.Drawing.Size(301, 26);
             this.richTextBox7.TabIndex = 14;
             this.richTextBox7.Text = "";
             // 
@@ -349,9 +369,9 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(46, 261);
+            this.button2.Location = new System.Drawing.Point(7, 260);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(214, 36);
+            this.button2.Size = new System.Drawing.Size(301, 36);
             this.button2.TabIndex = 5;
             this.button2.Text = "Save Settings";
             this.button2.UseVisualStyleBackColor = true;
@@ -397,16 +417,79 @@
             this.richTextBox1.Text = "50";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
-            // button11
+            // tabPage3
             // 
-            this.button11.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button11.Location = new System.Drawing.Point(8, 192);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(299, 25);
-            this.button11.TabIndex = 6;
-            this.button11.Text = "Clear all";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.tabPage3.Controls.Add(this.richTextBox9);
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.button12);
+            this.tabPage3.Controls.Add(this.progressBar2);
+            this.tabPage3.Controls.Add(this.button13);
+            this.tabPage3.Controls.Add(this.richTextBox8);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(314, 303);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Singe Primer Creator";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox8
+            // 
+            this.richTextBox8.Location = new System.Drawing.Point(7, 6);
+            this.richTextBox8.Name = "richTextBox8";
+            this.richTextBox8.Size = new System.Drawing.Size(300, 147);
+            this.richTextBox8.TabIndex = 0;
+            this.richTextBox8.Text = "";
+            // 
+            // button12
+            // 
+            this.button12.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button12.Location = new System.Drawing.Point(7, 192);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(300, 25);
+            this.button12.TabIndex = 9;
+            this.button12.Text = "Clear";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // progressBar2
+            // 
+            this.progressBar2.Location = new System.Drawing.Point(7, 266);
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(300, 31);
+            this.progressBar2.Step = 1;
+            this.progressBar2.TabIndex = 8;
+            // 
+            // button13
+            // 
+            this.button13.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button13.Location = new System.Drawing.Point(7, 223);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(300, 37);
+            this.button13.TabIndex = 7;
+            this.button13.Text = "Create Primer";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(100, 162);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(49, 19);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Name:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // richTextBox9
+            // 
+            this.richTextBox9.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox9.Location = new System.Drawing.Point(155, 159);
+            this.richTextBox9.Name = "richTextBox9";
+            this.richTextBox9.Size = new System.Drawing.Size(50, 27);
+            this.richTextBox9.TabIndex = 12;
+            this.richTextBox9.Text = "";
             // 
             // Form1
             // 
@@ -422,6 +505,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -458,6 +543,13 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.RichTextBox richTextBox8;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.RichTextBox richTextBox9;
+        private System.Windows.Forms.Label label8;
     }
 }
 

@@ -360,6 +360,74 @@ namespace PrimerDesignerGUI
             }
         }
 
+        private void button13_Click(object sender, EventArgs e)
+        {//Single Primer Creation
+            //Check for Directory
+            if (!Directory.Exists(richTextBox7.Text))
+            {
+                MessageBox.Show("Der angegebene Output Pfad existiert nicht");
+                goto Ende;
+            }
+            if (richTextBox9.Text=="")
+            {
+                MessageBox.Show("Bitte Namen eingeben.");
+                goto Ende;
+            }
+            if (richTextBox8.Text == "")
+            {
+                MessageBox.Show("Bitte Sequenz eingeben.");
+                goto Ende;
+            }
+            int primerConcentraion;
+            int.TryParse(richTextBox1.Text, out primerConcentraion);
+            int saltConcentration;
+            int.TryParse(richTextBox2.Text, out saltConcentration);
+            int distanceBetweenPrimer;
+            int.TryParse(richTextBox4.Text, out distanceBetweenPrimer);
+            int searchArea;
+            int.TryParse(richTextBox3.Text, out searchArea);
+            int minSeqLength;
+            int.TryParse(richTextBox5.Text, out minSeqLength);
+            int maxSeqLength;
+            int.TryParse(richTextBox6.Text, out maxSeqLength);
+            progressBar2.Maximum = 1;
+            progressBar2.Value = 0;
+            string[] outputPrimer = new string[2];
+            try
+            {
+                GeneSequence StrandSeq = new GeneSequence(richTextBox8.Text, richTextBox9.Text);
+                outputPrimer = StrandSeq.GetGenestrandSeqPrimer(distanceBetweenPrimer, minSeqLength, maxSeqLength, searchArea);
+                Primer SeqF1 = new Primer(outputPrimer[0], primerConcentraion, saltConcentration);
+                Primer SeqR1 = new Primer(outputPrimer[1], primerConcentraion, saltConcentration);
+                if (!Directory.Exists(richTextBox7.Text + "\\" + richTextBox9.Text))
+                {
+                    Directory.CreateDirectory(richTextBox7.Text + "\\" + richTextBox9.Text);
+                }
+                SeqF1.CreateSeqFile(richTextBox9.Text + "_SqF1", richTextBox7.Text + "\\" + richTextBox9.Text);
+                SeqR1.CreateSeqFile(richTextBox9.Text + "_SqR1", richTextBox7.Text + "\\" + richTextBox9.Text);
+                string SaveToPath = richTextBox7.Text + "\\" + richTextBox9.Text + @"\" + richTextBox9.Text + "-ECOM Order.txt"; //@"c:\temp\MyTest.txt";
+                using (StreamWriter sw = File.CreateText(SaveToPath))
+                {
+                    sw.WriteLine(StrandSeq.SeqName + "_SqF1\t" + SeqF1.Sequence);
+                    sw.WriteLine(StrandSeq.SeqName + "_SqR1\t" + SeqR1.Sequence);    
+                }
+                StrandSeq = null;
+                SeqF1 = null;
+                SeqR1 = null;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            progressBar2.Value = 1;
+        Ende:;
 
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            richTextBox8.Text = "";
+            richTextBox9.Text = "";
+        }
     }
 }
