@@ -19,7 +19,7 @@ namespace PrimerDesignerGUI
             this.länge = sequence.Length;
             if (!this.CheckForDnaChar())
             {
-                throw new Exception("None DNA Char found!");
+                throw new Exception(string.Format("None DNA Char found in {0}! No Primers created",seqName));
             }          
         }
         //Getter / Setter
@@ -34,7 +34,8 @@ namespace PrimerDesignerGUI
                 länge = sequence.Length;
                 if (!this.CheckForDnaChar())
                 {
-                    throw new Exception("None DNA Char found!");
+                    throw new Exception(string.Format("None DNA Char found in {0}! No Primers created", seqName));
+                    
                 }
             }
         }
@@ -76,15 +77,15 @@ namespace PrimerDesignerGUI
             //Check der Min&Max Länge für Genestrand
             if (länge < minSeqLänge || länge > maxSeqLänge)
             {
-                throw new Exception("Sequenzlänge liegt auserhalb des zulässingen Bereichs."+ minSeqLänge + " - "+ maxSeqLänge);
+                throw new Exception(string.Format("Sequenzlänge für {0} liegt auserhalb des zulässingen Bereichs." + minSeqLänge + " - "+ maxSeqLänge ,seqName));
             }
             if (distanceBetweenPrimer >(minSeqLänge + searchStartArea + 80))
             {
-                throw new Exception("Der Abstand der Primer ist zu groß gewählt so das keine Primer mehr ersellt werden können.");
+                throw new Exception(string.Format("Der Abstand der Primer für {0} ist zu groß gewählt so das keine Primer mehr ersellt werden können.",seqName));
             }
             if ((länge/2) < ((distanceBetweenPrimer/2) + searchStartArea + 40))
             {
-                throw new Exception("Der Abstand der Primer oder die Search Area ist zu groß gewählt so das keine Primer mehr ersellt werden können.");
+                throw new Exception(string.Format("Der Abstand der Primer oder die Search Area für {0} ist zu groß gewählt so das keine Primer mehr ersellt werden können.", seqName));
             }
             int midOfSeq=Länge/2;
             //Search for F Primer
@@ -181,7 +182,7 @@ namespace PrimerDesignerGUI
                 fUnicCounter++;
                 if (fUnicCounter==searchStartArea)
                 {
-                    throw new Exception("Es konnte kein Unic Primer innerhalb der suchkreterien gefunden werden.");
+                    throw new Exception(string.Format("Für {0} konnte kein Unic F-Primer innerhalb der suchkreterien gefunden werden.",seqName));
                 }
             }
             //Create f Primers
@@ -291,7 +292,7 @@ namespace PrimerDesignerGUI
                 rUnicCounter++;
                 if (rUnicCounter == searchStartArea)
                 {
-                    throw new Exception("Es konnte kein Unic Primer innerhalb der suchkreterien gefunden werden.");
+                    throw new Exception(string.Format("Für {0} konnte kein Unic R-Primer innerhalb der suchkreterien gefunden werden.", seqName));
                 }
             }
             //Create r Primers
@@ -334,7 +335,7 @@ namespace PrimerDesignerGUI
             string checkPath = Path.ToLower();
             if (checkPath.IndexOf(".seq") == -1)
             {
-                throw new Exception("Die Datein ist keine .SEQ Datei.");
+                throw new Exception(string.Format("Die Datei {0} ist keine .SEQ Datei.", checkPath));
             }
             else
             {

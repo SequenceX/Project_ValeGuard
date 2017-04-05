@@ -45,13 +45,18 @@ namespace PrimerDesignerGUI
                 try
                 {
                     s2[i] = s[i].Substring(s[i].LastIndexOf(@"\") + 1, s[i].LastIndexOf(@"-") - s[i].LastIndexOf(@"\") - 1);
+                    listBox2.Items.Add(s2[i]);
+                    listBox1.Items.Add(s[i]);
                 }
                 catch (Exception)
                 {
-                    s2[i] = Microsoft.VisualBasic.Interaction.InputBox( "Genname wurde nicht automatisch erkannt", "Genname fehlt", "Genname");
-                }
-                listBox2.Items.Add(s2[i]);
-                listBox1.Items.Add(s[i]);
+                    s2[i] = Microsoft.VisualBasic.Interaction.InputBox(string.Format("Genname für folgende Datei wurde nicht automatisch erkannt. {0}", s[i]), "Genname fehlt", "Genname");
+                    if (s2[i].Length!=0)
+                    {
+                        listBox2.Items.Add(s2[i]);
+                        listBox1.Items.Add(s[i]);
+                    }
+                }               
             }
         }
         private void listBox2_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
@@ -71,13 +76,18 @@ namespace PrimerDesignerGUI
                 try
                 {
                     s2[i] = s[i].Substring(s[i].LastIndexOf(@"\") + 1, s[i].LastIndexOf(@"-") - s[i].LastIndexOf(@"\") - 1);
+                    listBox2.Items.Add(s2[i]);
+                    listBox1.Items.Add(s[i]);
                 }
                 catch (Exception)
                 {
-                    s2[i] = Microsoft.VisualBasic.Interaction.InputBox("Genname wurde nicht automatisch erkannt", "Genname fehlt", "Genname");
+                    s2[i] = Microsoft.VisualBasic.Interaction.InputBox(string.Format("Genname für folgende Datei wurde nicht automatisch erkannt. {0}", s[i]), "Genname fehlt", "Genname");
+                    if (s2[i].Length != 0)
+                    {
+                        listBox2.Items.Add(s2[i]);
+                        listBox1.Items.Add(s[i]);
+                    }           
                 }
-                listBox2.Items.Add(s2[i]);
-                listBox1.Items.Add(s[i]);
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -256,7 +266,7 @@ namespace PrimerDesignerGUI
         private void button8_Click(object sender, EventArgs e)
         {
             //Default Settings
-            richTextBox3.Text = "30";
+            richTextBox3.Text = "20";
         }
         private void button9_Click(object sender, EventArgs e)
         {
