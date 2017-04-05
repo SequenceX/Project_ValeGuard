@@ -227,7 +227,7 @@ namespace PrimerDesignerGUI
                         }
                         else
                         {
-                            rPrimerStartPos -= 1;
+                            rPrimerStartPos += 1;
                             rPrimerStartPair = sequence.Substring(rPrimerStartPos, 2);
                         }
                         rHighTempStart = true;
@@ -258,7 +258,7 @@ namespace PrimerDesignerGUI
                             }
                             else
                             {
-                                rPrimerStartPos -= 1;
+                                rPrimerStartPos += 1;
                                 rPrimerStartPair = sequence.Substring(rPrimerStartPos, 2);
                             }
                         }
